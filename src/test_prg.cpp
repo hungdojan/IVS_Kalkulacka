@@ -25,7 +25,7 @@ TEST_F(BasicOperation, Sum) {
     EXPECT_TRUE(m.Sum(0, values[7]) == values[7]);
     EXPECT_EQ(m.Sum(values[2], values[3]), 481969641);
     EXPECT_EQ(m.Sum(values[3], -values[3]), 0);
-    double result = values[1];
+    double result = values[0];
     for (int i = 0; i < 3; i++) {
         result = m.Sum(result, values[i+1]);
     }
@@ -38,7 +38,7 @@ TEST_F(BasicOperation, Sub) {
     EXPECT_TRUE(m.Subtrac(values[7], values[9]) == 1.3);
     EXPECT_EQ(m.Subtrac(values[5], values[3]), -25846245);
     EXPECT_EQ(m.Subtrac(values[3], values[3]), 0);
-    double result = values[1];
+    double result = values[0];
     for (int i = 0; i < arr_size-1; i++) {
         result = m.Subtrac(result, values[i+1]);
     }
@@ -52,7 +52,7 @@ TEST_F(BasicOperation, Divide) {
     EXPECT_TRUE(m.Divide(values[2], values[9]) == -570154320);
     EXPECT_EQ(m.Divide(values[5], values[7]), -120);
     EXPECT_EQ(m.Divide(0, values[8]), 0);
-    double result = values[1];
+    double result = values[0];
     for (int i = 0; i < 3; i++) {
         result = m.Divide(result, values[i+1]);
     }
@@ -65,7 +65,7 @@ TEST_F(BasicOperation, Multiply) {
     EXPECT_TRUE(m.Multiply(values[2], values[3]) == 11789051226615360);
     EXPECT_EQ(m.Multiply(values[7], 0), 0);
     EXPECT_EQ(m.Multiply(1, values[6]), values[6]);
-    double result = values[1];
+    double result = values[0];
     for (int i = 0; i < 6; i++) {
         result = m.Multiply(result, values[i+1]);
     }
@@ -90,9 +90,9 @@ TEST_F(AdvanceOperation, Pow) {
     EXPECT_TRUE(m.Pow(values[10], values[1]) == 100000);
     EXPECT_EQ(m.Pow(values[1], 1), values[1]);
     EXPECT_EQ(m.Pow(values[1], 0), 1);
-    double result = values[1];
+    double result = values[0];
     for (int i = 0; i < 2; i++) {
-        result = m.Multiply(result, values[i+1]);
+        result = m.Pow(result, values[i+1]);
     }
     EXPECT_EQ(result, 1);
 }
