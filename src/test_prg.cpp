@@ -22,7 +22,7 @@ class AdvanceOperation : public ::testing::Test {
 // testovani funkce Sum (scitani)
 TEST_F(BasicOperation, Sum) {
     EXPECT_FALSE(m.Sum(values[0], values[1]) != 95);
-    EXPECT_TRUE(m.Sum(0, values[7]) == 0.5);
+    EXPECT_TRUE(m.Sum(0, values[7]) == values[7]);
     EXPECT_EQ(m.Sum(values[2], values[3]), 481969641);
     EXPECT_EQ(m.Sum(values[3], -values[3]), 0);
     double result = values[1];
@@ -47,27 +47,37 @@ TEST_F(BasicOperation, Sub) {
 
 // testovani funkce Divide (deleni)
 TEST_F(BasicOperation, Divide) {
-    EXPECT_ANY_THROW(m.Divide(10, 0));
-    EXPECT_FALSE(m.Divide(85, 10) != 8.5);
-    EXPECT_TRUE(m.Divide(456123456, -0.8) == -570154320);
-    EXPECT_EQ(m.Divide(-60, 0.5), -120);
-    EXPECT_EQ(m.Divide(0, 25846185), 0);
+    EXPECT_ANY_THROW(m.Divide(values[5], 0));
+    EXPECT_FALSE(m.Divide(values[1], values[0]) != 8.5);
+    EXPECT_TRUE(m.Divide(values[2], values[9]) == -570154320);
+    EXPECT_EQ(m.Divide(values[5], values[7]), -120);
+    EXPECT_EQ(m.Divide(0, values[8]), 0);
+    double result = values[1];
+    for (int i = 0; i < 3; i++) {
+        result = m.Divide(result, values[i+1]);
+    }
+    EXPECT_EQ(result, 387704937600);
 }
 
 // testovani funkce Multiply (nasobeni)
 TEST_F(BasicOperation, Multiply) {
-    EXPECT_FALSE(m.Multiply(85, -30) != -2550);
-    EXPECT_TRUE(m.Multiply(456123456, 25846185) == 11789051226615360);
-    EXPECT_EQ(m.Multiply(-60, 0), 0);
-    EXPECT_EQ(m.Multiply(1, 25846185), 25846185);
+    EXPECT_FALSE(m.Multiply(values[1], values[6]) != -2550);
+    EXPECT_TRUE(m.Multiply(values[2], values[3]) == 11789051226615360);
+    EXPECT_EQ(m.Multiply(values[7], 0), 0);
+    EXPECT_EQ(m.Multiply(1, values[6]), values[6]);
+    double result = values[1];
+    for (int i = 0; i < 6; i++) {
+        result = m.Multiply(result, values[i+1]);
+    }
+    EXPECT_EQ(result, 0);
 }
 
-// testovani funkce Divide (deleni)
-TEST_F(AdvanceOperation, Factor) {
-    EXPECT_ANY_THROW(m.Factor(0.65));
-    EXPECT_ANY_THROW(m.Factor(-30));
-    EXPECT_FALSE(m.Factor(10) != 3628800);
-    EXPECT_TRUE(m.Factor(5) == 120);
-    EXPECT_EQ(m.Factor(5), 120);
-    EXPECT_EQ(m.Divide(0, 25846185), 0);
-}
+// // testovani funkce Factor (faktorial)
+// TEST_F(AdvanceOperation, Factor) {
+//     EXPECT_ANY_THROW(m.Factor(0.65));
+//     EXPECT_ANY_THROW(m.Factor(-30));
+//     EXPECT_FALSE(m.Factor(10) != 3628800);
+//     EXPECT_TRUE(m.Factor(5) == 120);
+//     EXPECT_EQ(m.Factor(5), 120);
+//     EXPECT_EQ(m.Divide(0, 25846185), 0);
+// }
