@@ -51,7 +51,7 @@ TEST_F(BasicOperation, Sub) {
 
 // testovani funkce Divide (deleni)
 TEST_F(BasicOperation, Divide) {
-    EXPECT_ANY_THROW(m.Divide(values[5], 0));
+    EXPECT_ANY_THROW(m.Divide(values[5], 0));// test spadne, pokud se deli nulou
     EXPECT_FALSE(m.Divide(values[1], values[0]) != 8.5);
     EXPECT_TRUE(m.Divide(values[2], values[9]) == -570154320);
     EXPECT_EQ(m.Divide(values[5], values[7]), -120);
@@ -82,8 +82,8 @@ TEST_F(BasicOperation, Multiply) {
 
 // testovani funkce Factor (faktorial)
 TEST_F(AdvanceOperation, Factor) {
-    EXPECT_ANY_THROW(m.Factor(values[7]));
-    EXPECT_ANY_THROW(m.Factor(values[6]));
+    EXPECT_ANY_THROW(m.Factor(values[7]));// test spadne, pokud je faktorial desetinne cislo
+    EXPECT_ANY_THROW(m.Factor(values[6]));// test spadne, pokud je faktorial zaporne cislo
     EXPECT_FALSE(m.Factor(values[9]) != 3628800);
     EXPECT_TRUE(m.Factor(values[1]) == 120);
     EXPECT_EQ(m.Factor(values[4]), 1);
@@ -92,8 +92,8 @@ TEST_F(AdvanceOperation, Factor) {
 
 // testovani funkce Pow (umocneni)
 TEST_F(AdvanceOperation, Pow) {
-    EXPECT_ANY_THROW(m.Pow(values[1], values[7]));
-    EXPECT_ANY_THROW(m.Pow(values[1], values[6]));
+    EXPECT_ANY_THROW(m.Pow(values[1], values[7]));// test spadne, pokud je exponent desetinne cislo
+    EXPECT_ANY_THROW(m.Pow(values[1], values[6]));// test spadne, pokud je faktorial zaporne cislo
     EXPECT_FALSE(m.Pow(values[5], values[9]) != 9765625);
     EXPECT_TRUE(m.Pow(values[10], values[1]) == 100000);
     EXPECT_DOUBLE_EQ(m.Pow(0.6, values[1]), 0.07776);
@@ -108,11 +108,11 @@ TEST_F(AdvanceOperation, Pow) {
 
 // testovani funkce Sqrt (odmocneni)
 TEST_F(AdvanceOperation, Sqrt) {
-    EXPECT_ANY_THROW(m.Sqrt(2, values[6]));
-    EXPECT_ANY_THROW(m.Sqrt(0, values[1]));
+    EXPECT_ANY_THROW(m.Sqrt(2, values[6]));// test spadne, pokud se odmocnuje zaporne cislo
+    EXPECT_ANY_THROW(m.Sqrt(0, values[1]));// test spadne, pokud je odmocnitel nulovy
     EXPECT_FALSE(m.Sqrt(3, -27) != 9);
     EXPECT_TRUE(m.Sqrt(-2, values[2]) == 0.00004682295);
-    EXPECT_DOUBLE_EQ(m.Sqrt(-0.6, values[7]), 2.050270072);
+    EXPECT_DOUBLE_EQ(m.Sqrt(-0.6, 0.65), 2.050270072);
     EXPECT_EQ(m.Sqrt(1, values[1]), values[1]);
     EXPECT_EQ(m.Sqrt(6, 15625), 5);
     double result = values[0];
@@ -124,11 +124,17 @@ TEST_F(AdvanceOperation, Sqrt) {
 
 // testovani funkce Log10 (logaritmus o zakladu 10)
 TEST_F(AdvanceOperation, Log10) {
-    EXPECT_ANY_THROW(m.Log10(0));
-    EXPECT_ANY_THROW(m.Log10(-5));
+    EXPECT_ANY_THROW(m.Log10(0));// test spadne, pokud logaritmujeme nulu
+    EXPECT_ANY_THROW(m.Log10(-5));// test spadne, pokud logaritmujeme zapornym cislem
     EXPECT_FALSE(m.Log10(50) != 1.698970004);
     EXPECT_TRUE(m.Log10(values[2]) == 8.659082406);
     EXPECT_DOUBLE_EQ(m.Log10(35.4), 1.549003262);
     EXPECT_EQ(m.Log10(1), 0);
     EXPECT_EQ(m.Log10(69), 1.838849091);
+    double result = values[0];
+    for (int i = 0; i < 2; i++) {
+        result = m.Log10(values[0]);
+        values[0] = values[i+1];
+    }
+    EXPECT_EQ(result, 0.6989700043);
 }
