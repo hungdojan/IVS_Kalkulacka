@@ -81,3 +81,18 @@ TEST_F(AdvanceOperation, Factor) {
     EXPECT_EQ(m.Factor(values[4]), 1);
     EXPECT_EQ(m.Factor(values[0]), 1);
 }
+
+// testovani funkce Pow (umocneni)
+TEST_F(AdvanceOperation, Pow) {
+    EXPECT_ANY_THROW(m.Pow(values[1], values[7]));
+    EXPECT_ANY_THROW(m.Pow(values[1], values[6]));
+    EXPECT_FALSE(m.Pow(values[5], values[9]) != 9765625);
+    EXPECT_TRUE(m.Pow(values[10], values[1]) == 100000);
+    EXPECT_EQ(m.Pow(values[1], 1), values[1]);
+    EXPECT_EQ(m.Pow(values[1], 0), 1);
+    double result = values[1];
+    for (int i = 0; i < 2; i++) {
+        result = m.Multiply(result, values[i+1]);
+    }
+    EXPECT_EQ(result, 1);
+}
