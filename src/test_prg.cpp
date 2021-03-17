@@ -13,8 +13,8 @@ class BasicOperation : public ::testing::Test {
 class AdvanceOperation : public ::testing::Test {
     protected:
         Math m;
-        double values[9] = {1, 5, 456123456, 25846185, 0, -60, -30, 0.65, -0.8};
-        const int arr_size = 9;
+        double values[10] = {1, 5, 456123456, 25846185, 0, -60, -30, 0.65, -0.8, 10};
+        const int arr_size = 10;
         virtual void SetUp() {};
         virtual void TearDown() {};
 };
@@ -72,12 +72,12 @@ TEST_F(BasicOperation, Multiply) {
     EXPECT_EQ(result, 0);
 }
 
-// // testovani funkce Factor (faktorial)
-// TEST_F(AdvanceOperation, Factor) {
-//     EXPECT_ANY_THROW(m.Factor(0.65));
-//     EXPECT_ANY_THROW(m.Factor(-30));
-//     EXPECT_FALSE(m.Factor(10) != 3628800);
-//     EXPECT_TRUE(m.Factor(5) == 120);
-//     EXPECT_EQ(m.Factor(5), 120);
-//     EXPECT_EQ(m.Divide(0, 25846185), 0);
-// }
+// testovani funkce Factor (faktorial)
+TEST_F(AdvanceOperation, Factor) {
+    EXPECT_ANY_THROW(m.Factor(values[7]));
+    EXPECT_ANY_THROW(m.Factor(values[6]));
+    EXPECT_FALSE(m.Factor(values[9]) != 3628800);
+    EXPECT_TRUE(m.Factor(values[1]) == 120);
+    EXPECT_EQ(m.Factor(values[4]), 1);
+    EXPECT_EQ(m.Factor(values[0]), 1);
+}
