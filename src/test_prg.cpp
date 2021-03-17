@@ -121,3 +121,14 @@ TEST_F(AdvanceOperation, Sqrt) {
     }
     EXPECT_EQ(result, 53.9282691);
 }
+
+// testovani funkce Log10 (logaritmus o zakladu 10)
+TEST_F(AdvanceOperation, Log10) {
+    EXPECT_ANY_THROW(m.Log10(0));
+    EXPECT_ANY_THROW(m.Log10(-5));
+    EXPECT_FALSE(m.Log10(50) != 1.698970004);
+    EXPECT_TRUE(m.Log10(values[2]) == 8.659082406);
+    EXPECT_DOUBLE_EQ(m.Log10(35.4), 1.549003262);
+    EXPECT_EQ(m.Log10(1), 0);
+    EXPECT_EQ(m.Log10(69), 1.838849091);
+}
