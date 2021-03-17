@@ -37,7 +37,7 @@ TEST_F(BasicOperation, Sum) {
 // testovani funkce Sub (scitani)
 TEST_F(BasicOperation, Sub) {
     EXPECT_FALSE(m.Subtrac(values[0], values[1]) != -75);
-    EXPECT_TRUE(m.Subtrac(values[7], values[9]) == 1.3);
+    EXPECT_DOUBLE_EQ(m.Subtrac(values[7], values[9]), 1.3);
     EXPECT_EQ(m.Subtrac(values[5], values[3]), -25846245);
     EXPECT_EQ(m.Subtrac(values[3], values[3]), 0);
     EXPECT_DOUBLE_EQ(m.Subtrac(0.3, values[8]), -0.35);
@@ -55,7 +55,7 @@ TEST_F(BasicOperation, Divide) {
     EXPECT_FALSE(m.Divide(values[1], values[0]) != 8.5);
     EXPECT_TRUE(m.Divide(values[2], values[9]) == -570154320);
     EXPECT_EQ(m.Divide(values[5], values[7]), -120);
-    EXPECT_EQ(m.Divide(values[8], values[7]), 1.3);
+    EXPECT_DOUBLE_EQ(m.Divide(values[8], values[7]), 1.3);
     EXPECT_EQ(m.Divide(0, values[8]), 0);
     EXPECT_DOUBLE_EQ(m.Divide(27.43, -values[8]), -42.2);
     EXPECT_DOUBLE_EQ(m.Divide(values[8], 9.5), 0.06842105263157894736842105263158);
@@ -130,6 +130,7 @@ TEST_F(AdvanceOperation, Log10) {
     EXPECT_TRUE(m.Log10(values[2]) == 8.659082406);
     EXPECT_DOUBLE_EQ(m.Log10(35.4), 1.549003262);
     EXPECT_EQ(m.Log10(1), 0);
+	EXPECT_DOUBLE_EQ(m.Log10(0.01), -2.0);
     EXPECT_EQ(m.Log10(69), 1.838849091);
     double result = values[0];
     for (int i = 0; i < 2; i++) {
