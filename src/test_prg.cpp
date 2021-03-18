@@ -26,27 +26,37 @@ TEST_F(BasicOperation, Sum) {
     EXPECT_EQ(m.Sum(values[2], values[3]), 481969641);
     EXPECT_EQ(m.Sum(values[3], -values[3]), 0);
     EXPECT_DOUBLE_EQ(m.Sum(0.3, values[8]), 0.95);
-    EXPECT_DOUBLE_EQ(m.Sum(values[9], values[8]), 0.15);
+    EXPECT_DOUBLE_EQ(m.Sum(values[9], values[8]), -0.15);
     double result = values[0];
     for (int i = 0; i < 3; i++) {
         result = m.Sum(result, values[i+1]);
     }
     EXPECT_EQ(result, 481969736);
+
+	EXPECT_EQ(m.Sum(5, 10), m.Sum(10, 5));
+	EXPECT_EQ(m.Sum(m.Sum(10, 20), 30),
+			  m.Sum(10, m.Sum(20, 30)));
 }
 
-// testovani funkce Sub (scitani)
-TEST_F(BasicOperation, Sub) {
-    EXPECT_FALSE(m.Subtrac(values[0], values[1]) != -75);
-    EXPECT_DOUBLE_EQ(m.Subtrac(values[7], values[9]), 1.3);
-    EXPECT_EQ(m.Subtrac(values[5], values[3]), -25846245);
-    EXPECT_EQ(m.Subtrac(values[3], values[3]), 0);
-    EXPECT_DOUBLE_EQ(m.Subtrac(0.3, values[8]), -0.35);
-    EXPECT_DOUBLE_EQ(m.Subtrac(values[9], 0.2), -1);
+// testovani funkce Subtract (scitani)
+TEST_F(BasicOperation, Subtract) {
+    EXPECT_FALSE(m.Subtract(values[0], values[1]) != -75);
+    EXPECT_DOUBLE_EQ(m.Subtract(values[7], values[9]), 1.3);
+    EXPECT_EQ(m.Subtract(values[5], values[3]), -25846245);
+    EXPECT_EQ(m.Subtract(values[3], values[3]), 0);
+    EXPECT_DOUBLE_EQ(m.Subtract(0.3, values[8]), -0.35);
+    EXPECT_DOUBLE_EQ(m.Subtract(values[9], 0.2), -1);
+	EXPECT_DOUBLE_EQ(m.Subtract(0.5, 0.5), 0);
+	EXPECT_DOUBLE_EQ(m.Subtract(-1.3, -1.3), 0);
     double result = values[0];
     for (int i = 0; i < arr_size-1; i++) {
-        result = m.Subtrac(result, values[i+1]);
+        result = m.Subtract(result, values[i+1]);
     }
     EXPECT_EQ(result, -481969626.35);
+
+	EXPECT_NE(m.Subtract(30, 40), m.Subtract(40, 30));
+	EXPECT_NE(m.Subtract(m.Subtract(10, 20), 30),
+			  m.Subtract(10, m.Subtract(20, 30)));
 }
 
 // testovani funkce Divide (deleni)
@@ -59,11 +69,11 @@ TEST_F(BasicOperation, Divide) {
     EXPECT_EQ(m.Divide(0, values[8]), 0);
     EXPECT_DOUBLE_EQ(m.Divide(27.43, -values[8]), -42.2);
     EXPECT_DOUBLE_EQ(m.Divide(values[8], 9.5), 0.06842105263157894736842105263158);
-    double result = values[0];
-    for (int i = 0; i < 3; i++) {
-        result = m.Divide(result, values[i+1]);
-    }
-    EXPECT_EQ(result, 387704937600);
+	EXPECT_DOUBLE_EQ(m.Divide(-1, 8), -0.125);
+	double res = 64;
+	for (int i = 0; i < 8; i++)
+		EXPECT_NO_THROW(res = m.Divide(res, 2));
+	EXPECT_DOUBLE_EQ(res, 0.25);
 }
 
 // testovani funkce Multiply (nasobeni)
@@ -78,6 +88,10 @@ TEST_F(BasicOperation, Multiply) {
         result = m.Multiply(result, values[i+1]);
     }
     EXPECT_EQ(result, 0);
+
+	EXPECT_EQ(m.Multiply(5, 10), m.Multiply(10, 5));
+	EXPECT_EQ(m.Multiply(m.Multiply(10, 20), 30),
+			  m.Multiply(10, m.Multiply(20, 30)));
 }
 
 // testovani funkce Factor (faktorial)
@@ -93,25 +107,24 @@ TEST_F(AdvanceOperation, Factor) {
 // testovani funkce Pow (umocneni)
 TEST_F(AdvanceOperation, Pow) {
     EXPECT_ANY_THROW(m.Pow(values[1], values[7]));// test spadne, pokud je exponent desetinne cislo
-    EXPECT_ANY_THROW(m.Pow(values[1], values[6]));// test spadne, pokud je faktorial zaporne cislo
-    EXPECT_FALSE(m.Pow(values[5], values[9]) != 9765625);
-    EXPECT_TRUE(m.Pow(values[10], values[1]) == 100000);
+    EXPECT_ANY_THROW(m.Pow(values[1], values[6]));// test spadne, pokud je exponent zaporne cislo
+    EXPECT_TRUE(m.Pow(values[9], values[1]) == 100000);
     EXPECT_DOUBLE_EQ(m.Pow(0.6, values[1]), 0.07776);
     EXPECT_EQ(m.Pow(values[1], 1), values[1]);
     EXPECT_EQ(m.Pow(values[1], 0), 1);
     double result = values[0];
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
         result = m.Pow(result, values[i+1]);
     }
-    EXPECT_EQ(result, 1);
+    EXPECT_DOUBLE_EQ(result, 1);
 }
 
 // testovani funkce Sqrt (odmocneni)
 TEST_F(AdvanceOperation, Sqrt) {
     EXPECT_ANY_THROW(m.Sqrt(2, values[6]));// test spadne, pokud se odmocnuje zaporne cislo
     EXPECT_ANY_THROW(m.Sqrt(0, values[1]));// test spadne, pokud je odmocnitel nulovy
-    EXPECT_FALSE(m.Sqrt(3, -27) != 9);
-    EXPECT_TRUE(m.Sqrt(-2, values[2]) == 0.00004682295);
+    EXPECT_NE(m.Sqrt(3, -27), 9);
+    EXPECT_DOUBLE_EQ(m.Sqrt(-2, values[2]), 0.00004682295);
     EXPECT_DOUBLE_EQ(m.Sqrt(-0.6, 0.65), 2.050270072);
     EXPECT_EQ(m.Sqrt(1, values[1]), values[1]);
     EXPECT_EQ(m.Sqrt(6, 15625), 5);
@@ -119,23 +132,45 @@ TEST_F(AdvanceOperation, Sqrt) {
     for (int i = 0; i < 2; i++) {
         result = m.Sqrt(result, values[i+1]);
     }
-    EXPECT_EQ(result, 53.9282691);
+    EXPECT_DOUBLE_EQ(result, 53.9282691);
 }
 
 // testovani funkce Log10 (logaritmus o zakladu 10)
 TEST_F(AdvanceOperation, Log10) {
     EXPECT_ANY_THROW(m.Log10(0));// test spadne, pokud logaritmujeme nulu
     EXPECT_ANY_THROW(m.Log10(-5));// test spadne, pokud logaritmujeme zapornym cislem
-    EXPECT_FALSE(m.Log10(50) != 1.698970004);
-    EXPECT_TRUE(m.Log10(values[2]) == 8.659082406);
+    EXPECT_DOUBLE_EQ(m.Log10(50), 1.698970004);
+    EXPECT_DOUBLE_EQ(m.Log10(values[2]), 8.659082406);
     EXPECT_DOUBLE_EQ(m.Log10(35.4), 1.549003262);
     EXPECT_EQ(m.Log10(1), 0);
 	EXPECT_DOUBLE_EQ(m.Log10(0.01), -2.0);
-    EXPECT_EQ(m.Log10(69), 1.838849091);
+    EXPECT_DOUBLE_EQ(m.Log10(69), 1.838849091);
     double result = values[0];
     for (int i = 0; i < 2; i++) {
         result = m.Log10(values[0]);
         values[0] = values[i+1];
     }
-    EXPECT_EQ(result, 0.6989700043);
+    EXPECT_DOUBLE_EQ(result, 0.6989700043);
+}
+
+// testovani Pythogorovy vety
+TEST(CombinedOperation, Pythogoras) {
+	Math m;
+	double a=3, b=4;
+	double res = 0;
+
+	EXPECT_NO_THROW(res = m.Sqrt(2, m.Sum(m.Pow(a, 2), m.Pow(b, 2))));
+	EXPECT_DOUBLE_EQ(res, 5);
+
+	a=5, b=12;
+	EXPECT_NO_THROW(res = m.Sqrt(2, m.Sum(m.Pow(a, 2), m.Pow(b, 2))));
+	EXPECT_DOUBLE_EQ(res, 13);
+}
+
+// testovani vypoctu obsahu kruhu
+TEST(CombinedOperation, CircleArea) {
+	Math m;
+	double radius = 12;
+	double pi = 3.14;
+	EXPECT_DOUBLE_EQ(m.Multiply(pi, m.Pow(radius, 2)), 452.16);
 }
