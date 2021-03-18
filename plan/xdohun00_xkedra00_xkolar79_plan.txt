@@ -1,0 +1,74 @@
+Plan projektu "GUI Kalkulacka"
+==============================
+
+Tym: StrelaDoNohy
+
+Stanovene terminy:
+    1. cast
+        -    13.03. - Prvni schuze
+                    - Tvorba planu projektu
+        - do 16.03. - Inicializace repozitare
+                    - Pridani hlavnich souboru pro prvni cast projektu
+                        - README.md
+                        - Makefile
+                        - math_lib.cpp
+                        - test_prg.cpp - gtest pro knihovnu
+
+        - do 22.03. - Dokonceni testovacich souboru
+
+        - od 21.03. - Tvorba matem. knihovny
+        - do 01.04. -
+    2. cast
+        - od 21.03. - Tvorba GUI
+        - do 08.04. - 
+
+        - od 01.04. - Tvorba profilingu
+        - do 11.04. - 
+    3. cast
+        - od 12.04. - Tvorba instalacniho balicku, testovani na cilovem zarizeni,
+        - do 25.04. - generovani dokumentace
+
+        - do 30.04. - Reseni pripadnych problemu
+
+        -    30.04. - Odevzdani projektu
+
+Rozdeleni ukolu:
+    
+    Hung Do (xdohun00) - vedouci tymu
+        - Sprava repozitare
+        - Prace s makefile
+        - Instalacni balicky
+        - Generovani dokumentu
+    
+    David Kedra (xkedra00)
+        - Vyvoj matematicke knihovny
+        - Vyvoj profilingu
+
+    Petr Kolarik (xkolar79)
+        - Testovaci skripta
+        - GUI
+
+    Role jsou dane volne, je moznost prace vice lidi na jednom ukolu. Clovek, kteremu 
+    je ukol pridelen, vsak musi odvest nejvice prace na svem ukolu.
+
+Komunikacni kanaly:
+    
+    Hlavni komunikacni kanal byly vybrany: FB Messenger a aplikace ClickUp (https://clickup.com/).
+
+    Messenger bylo vybrano za ucelem rychle odezvy mezi cleny tymu.
+    ClickUp bylo vybrano za ucelem naplanovani ukolu, podukolu a terminu; informace o tom, 
+    kdo na cem momentalne pracuje; integrace sdileneho dokumentu pro FAQ, dulezite odkazy apod.;
+    prehledne timeline, na kterem jde videt, do kdy/jak moc urgentni jaky ukol je
+        + notifikace na email.
+
+Dalsi informace:
+
+    Vyvoj na platforme      - Ubuntu 20.04 (x64)
+    Vybrany prog. jazyk     - C/C++
+    System pro spravu verzi - Git
+    Hosting                 - GitHub
+                            - URL: https://github.com/hungdojan/IVS_Kalkulacka
+                            - repozitar je nastaven na "Privatni"
+                            - vyucujicim byla odeslana pozvanka (https://github.com/ivskontrola) 
+                                pro pristup a nahled do repozitare
+
