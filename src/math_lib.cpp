@@ -58,10 +58,6 @@ double Math::Pow(double base, double exp){
         throw std::invalid_argument("Chyba: Kalkulacka nepocita s desetinnym exponentem!");
     else if(exp < 0)
         throw std::invalid_argument("Chyba: Kalkulacka nepocita se zapornym exponentem!");
-
-    //doslo by k odmocnovani zaporneho cisla
-    if(base < 0 && exp < 0)
-        throw std::invalid_argument("Chyba: Nedefinovana kombinace hodnot!");
     
     return pow(base, exp);
 }
