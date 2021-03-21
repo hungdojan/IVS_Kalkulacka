@@ -1,1 +1,6 @@
-*.o
+/src/*
+!/src/build/
+!/src/include/
+!/src/CMakeLists.txt
+!/src/**/.cpp
+!/src/**/.h
