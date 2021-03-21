@@ -42,10 +42,10 @@ public:
      * @param a cislo, ze ktereho chceme faktorial
      * @return faktorial zadaneho cisla "a!"
      */
-    int Factor(int a);
+    int Factor(double a);
 
     /**
-     * @brief Funkce pocita druhou odmocninu z cisla typu double
+     * @brief Funkce pocita odmocninu z cisla typu double
      * @param radicand odmocnenec (zaklad odmocniny)
      * @param index kolikata odmocnina je pozadovana
      * @return index-ta odmocnina z cisla radicand
@@ -53,7 +53,7 @@ public:
     double Sqrt(double index, double radicand);
 
     /**
-     * @brief Funkce umocnuje cislo
+     * @brief Funkce umocnuje cislo na prirozeny exponent
      * @param base zaklad mocniny
      * @param exp exponent 
      * @return mocnina base^exp
@@ -62,7 +62,7 @@ public:
 
     /**
      * @brief Funkce zjisti logaritmus o zakladu 10 z cisla
-     * @param num cislo k zlogaritmovani
+     * @param num cislo ke zlogaritmovani
      * @return logaritmus z num o zakladu 10
      */
     double Log10(double num);
