@@ -4,3 +4,5 @@
 !/src/CMakeLists.txt
 !/src/**/.cpp
 !/src/**/.h
+!/src/gui/
+!/src/googletest

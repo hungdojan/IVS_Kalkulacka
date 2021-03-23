@@ -7,6 +7,10 @@ project(Kalkulacka)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)     # .so
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)     # .a
+
 # Include hlavickovych souboru ve slozce include
 include_directories(include)
 
@@ -14,8 +18,8 @@ include_directories(include)
 set(TEST_SOURCE test_lib)
 set(MATH_LIB math_lib)
 
-# Tvorba knihoven "libgtest.a" a "libtest_main.a"
 add_subdirectory(googletest)
+add_subdirectory(gui)
 
 # Tvorba spustitelneho "./test_lib"
 # g++ -o ${TEST_SOURCE} ${TEST_SOURCE} -L. -l${MATH_LIB} -lgtest -lgtest_main
@@ -27,6 +31,12 @@ add_library(${MATH_LIB} STATIC math_lib.cpp)
 
 # Tvorba prikazu "make test"
 add_custom_target(test
-    COMMAND ./${TEST_SOURCE}
+    COMMAND ./bin/${TEST_SOURCE}
     DEPENDS ${TEST_SOURCE}
+    VERBATIM)
+
+# Tvorba prikazu "make run"
+add_custom_target(run
+    COMMAND ./bin/${PROJECT_NAME}
+    DEPENDS ${PROJECT_NAME}
     VERBATIM)
