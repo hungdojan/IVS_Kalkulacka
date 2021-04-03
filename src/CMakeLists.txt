@@ -17,6 +17,7 @@ include_directories(include)
 # Nastaveni promennych
 set(TEST_SOURCE test_lib)
 set(MATH_LIB math_lib)
+set(PROFILING profiling)
 
 add_subdirectory(googletest)
 add_subdirectory(gui)
@@ -25,6 +26,10 @@ add_subdirectory(gui)
 # g++ -o ${TEST_SOURCE} ${TEST_SOURCE} -L. -l${MATH_LIB} -lgtest -lgtest_main
 add_executable(${TEST_SOURCE} ${TEST_SOURCE}.cpp)
 target_link_libraries(${TEST_SOURCE} PRIVATE ${MATH_LIB} gtest gtest_main)
+
+# Tvorba spustitelneho ./profiling
+add_executable(${PROFILING} profiling.cpp)
+target_link_libraries(${PROFILING} PRIVATE ${MATH_LIB})
 
 # Tvorba knihovny "libmath_lib.a"
 add_library(${MATH_LIB} STATIC math_lib.cpp)
