@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include "math_lib.h"
-#include "math_lib.cpp"
 
 using namespace std;
 
