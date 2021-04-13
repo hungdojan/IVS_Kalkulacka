@@ -14,13 +14,13 @@ QT_END_NAMESPACE
  * @brief Vycet tlacitek v aplikaci
  */
 enum Button {
-    ZERO=0, ONE, TWO, THREE, FOUR,
-    FIVE, SIX, SEVEN, EIGHT, NINE, POINT, 
+    ZERO=0, ONE, TWO, THREE, FOUR, FIVE,
+    SIX, SEVEN, EIGHT, NINE, POINT, INV,
     ADD, SUB, MUL, DIV,
     LOG, POW, SQRT, FACT,
-    EQL, HELP, DEL,
+    EQL, HELP, DEL, CLR,
     // additional features
-    BRACKET_L, BRACKET_R
+    MEMOUT, MEMIN
 };
 
 /**
@@ -42,11 +42,15 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    Operation operation;			/**< Znamenko operace	*/
-    double result;					/**< Prubezny vysledek 	*/
-    QString currText;				/**< Obsah lcd displeje */
-    QSignalMapper *signalMapper;	/**< Pridelovac akci 	*/
-    Math m;							/**< Mat. knihovna		*/
+    Operation operation;			/**< Znamenko operace                   */
+    double result;					/**< Prubezny vysledek                  */
+    QString currText;				/**< Obsah lcd displeje                 */
+    QSignalMapper *signalMapper;	/**< Pridelovac akci 	                */
+    Math m;							/**< Mat. knihovna                      */
+    bool toClear;                   /**< Smazat pred novym operandem        */
+    Operation adv_operation;        /**< advance operace, k zachovani basic */
+    double adv_result;              /**< 1.operand advanc op. pow,sqrt      */
+    double memory;                  /**< pamet pro ulozeni currText (op. M+)*/
 
     /**
      * @brief Mapovani akci
@@ -62,6 +66,12 @@ private:
      * @param id ID tlacitka (podle enum Button)
      */
     void PrintNumber(int id);
+
+    /**
+     * @brief Resetovani hodnot, nastaveni, operaci na vychozi stav.
+     *  Napr. po chybe nebo po CLEAR
+     */
+    void ResetVals();
 
     /**
      * @brief Zakladni mat. operace
@@ -99,11 +109,18 @@ private:
     void DeleteDigit();
 
     /**
-     * @brief Operace se zavorkami
-     * 	TODO: this feature can be removed in the final version
+     * @brief Vynuluje kalkulacku
+     *  Vynuluje vsechny vysledky i mezivysledky
+     *  Pamet ponechava
+     */
+    void ClearData();
+
+    /**
+     * @brief Operace se promennou
+     * 	Uklada, nebo tiskne ulozenou hodnotu
      * @param id ID tlacitka (podle enum Button)
      */
-    void BracketOperation(int id);
+    void MemoryOperation(int id);
 
     /**
      * @brief Klavesove udalosti
