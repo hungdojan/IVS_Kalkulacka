@@ -43,13 +43,18 @@ int Math::Factor(double a){
 
 double Math::Sqrt(double index, double radicand){
     //odmocninu lze vykonat pouze z kladneho cisla
-    if(radicand < 0 && ((int)index % 2 == 0))
-        throw std::invalid_argument("Chyba: Nelze vypocitat odmocninu ze zaporneho cisla!");
-    else if(index == 0)
+    if((radicand < 0) && ((int)index % 2 == 0)){
+		throw std::invalid_argument("Chyba: Nelze vypocitat odmocninu ze zaporneho cisla!");
+    }
+	else if(index == 0)
         throw std::invalid_argument("Chyba: Nulta odmocnina neni definovana!");   
 
-    //obecna odmocnina implementovana jako mocnina na zlomek
-    return pow(radicand, 1/index);
+	//obecna odmocnina implementovana jako mocnina na zlomek
+	if(radicand >= 0)
+		return pow(radicand, 1.0/index);
+	//odmocnina ze zaporneho cisla, je rovna -1 * odm. z kladneho
+	else
+		return -1 *pow(-1*radicand, 1.0/index);
 }
 
 double Math::Pow(double base, double exp){
