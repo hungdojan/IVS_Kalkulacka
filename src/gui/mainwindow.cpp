@@ -366,7 +366,7 @@ void MainWindow::OutputResult() {
 }
 
 void MainWindow::DisplayHelp() {
-    // TODO:
+    helpWindow.show();
     qDebug() << "Tlacitko: " << Button::HELP;
 }
 
