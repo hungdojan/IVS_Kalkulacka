@@ -5,6 +5,7 @@
 #include <QSignalMapper>
 #include <QKeyEvent>
 #include "math_lib.h"
+#include "helpwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,6 +42,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    HelpWindow helpWindow;			/**< Okno, ktery vypisuje napovedu		*/
 
     Operation operation;			/**< Znamenko operace                   */
     double result;					/**< Prubezny vysledek                  */

@@ -8,5 +8,5 @@ insert_final_newline = true
 
 # Nastaveni odsazovani .cpp a .h souboru
 [*.{cpp, h}]
-indent_style = tab
+indent_style = space
 indent_size = 4
