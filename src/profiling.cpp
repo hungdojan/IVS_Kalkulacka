@@ -30,7 +30,8 @@ int main(){
         values.insert(values.begin()+quantity, num);
 
         quantity++;
-        sum += num;
+		//pripocteni cisla do celkove sumy
+		sum = m.Sum(sum, num);
     }  
     /**
      * pokud nebylo precteno cislo, ale zaroven nejsme na konci souboru (eof)
@@ -42,7 +43,12 @@ int main(){
     }    
 
     //vypocet prumerne hodnoty ze vsech prvku
-    middle = sum / quantity;
+	try{
+		middle = m.Divide(sum, quantity);
+	}
+	catch(exception e){
+		cout << "Chyba: pocet vstupnich hodnot je 0!" << endl;
+	}
 
     double innerCalc = 0;   //vnitrni mezivypocet vzorce
     double deviation = 0;   //samotna vysledna odchylka
