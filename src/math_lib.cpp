@@ -16,15 +16,15 @@ double Math::Multiply(double a, double b){
     return a*b;
 }
 
-int Math::Factor(double a){
+double Math::Factor(double a){
     //Factor pocita pouze s celymi cisly, ale testuje vstup double
     if(floor(a) != a)
         throw std::invalid_argument("Chyba: Nelze vypocitat faktorial desetinneho cisla!");
 
     //vysledek, kam se postupne pricita faktorial
-    int result = 1;
+    double result = 1;
     //snizujici se cislo, ze ktereho pocitame faktorial
-    int fact = (int)a;
+    double fact = a;
 
     //faktorial ze zaporneho cisla nelze, vyhodi vyjimku
     if(fact < 0)

@@ -61,7 +61,7 @@ public:
      * @param[in] a Číslo, ze kterého chceme faktoriíl
      * @return Faktoriál zadaného čísla "a!"
      */
-    int Factor(double a);
+    double Factor(double a);
 
     /**
      * @brief Operace obecné odmocniny
