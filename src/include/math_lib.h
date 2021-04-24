@@ -1,3 +1,15 @@
+/**
+ * @class Math main_lib.h "./include/main_lib.h"
+ * @brief Matematická knihovna
+ *
+ * @details Tato třída obsahuje prototypy funkci matematické knihovny.
+ *
+ * @authors Hung Do, David Kedra, Petr Kolařík
+ *
+ * @version 1.0.0
+ * @date 30.04.2021
+ * @copyright GNU Public Licence v3.0
+ */
 #ifndef _MATH_LIB_H
 #define _MATH_LIB_H
 #include <cmath>
@@ -6,66 +18,81 @@ class Math
 {
 public: 
     /**
-     * @brief Funkce scita 2 cisla typu double
-     * @param a prvni scitanec
-     * @param b druhy scitanec
-     * @return soucet parametru a+b
+     * @brief Operace sčítání
+     * @details Funkce sčítá 2 čísla typu double
+     * @param[in] a První sčítanec
+     * @param[in] b Druhý sčítanec
+     * @return Součet parametrů a+b
      */ 
     double Sum(double a, double b);
 
     /**
-     * @brief Funkce odcita 2 cisla typu double
-     * @param a mensenec
-     * @param b mensitel 
-     * @return rozdil parametru a-b
+     * @brief Operace odčítání
+     * @details Funkce odčítá 2 cisla typu double
+     * @param[in] a Menšenec
+     * @param[in] b Menšitel 
+     * @return Rozdíl parametrů a-b
      */ 
     double Subtract(double a, double b);
 
     /**
-     * @brief Funkce deli 2 cisla typu double
-     * @param a delenec 
-     * @param b delitel 
-     * @return podil parametru a/b
+     * @brief Operace dělení
+     * @details Funkce dělí 2 čísla typu double
+     * @throw std::invalid_argument Dělení nulou
+     * @param[in] a Dělenec 
+     * @param[in] b Dělitel 
+     * @return Podíl parametrů a/b
      */
     double Divide(double a, double b);
 
     /**
-     * @brief Funkce nasobi 2 cisla typu double
-     * @param a prvni cinitel
-     * @param b druhy cinitel
-     * @return soucin parametru a*b
+     * @brief Operace násobení
+     * @details Funkce násobí 2 čísla typu double
+     * @param[in] a První činitel
+     * @param[in] b Druhý činitel
+     * @return Součin parametrů a*b
      */
     double Multiply(double a, double b);
 
     /**
-     * @brief Funkce pocita faktorial cisla
-     * @param a cislo, ze ktereho chceme faktorial
-     * @return faktorial zadaneho cisla "a!"
+     * @brief Operace faktoriál
+     * @details Funkce počítá faktoriál čísla
+     * @throw std::invalid_argument Parametr a není přirozené číslo
+     * @param[in] a Číslo, ze kterého chceme faktoriíl
+     * @return Faktoriál zadaného čísla "a!"
      */
     int Factor(double a);
 
     /**
-     * @brief Funkce pocita odmocninu z cisla typu double
-     * @param radicand odmocnenec (zaklad odmocniny)
-     * @param index kolikata odmocnina je pozadovana
-     * @return index-ta odmocnina z cisla radicand
+     * @brief Operace obecné odmocniny
+     * @details Funkce počítá odmocninu z čísla typu double
+     * @throw std::invalid_argument Odmocnění záporného čísla ze sudého indexu; 
+     *  hodnota indexu je nula
+     * @param[in] radicand Odmocnenec (základ odmocniny)
+     * @param[in] index Kolikátá odmocnina je požadována
+     * @return Index-tá odmocnina z čísla radicand
      */
     double Sqrt(double index, double radicand);
 
     /**
-     * @brief Funkce umocnuje cislo na prirozeny exponent
-     * @param base zaklad mocniny
-     * @param exp exponent 
-     * @return mocnina base^exp
+     * @brief Operace mocniny
+     * @details Funkce umocňuje číslo na přirozený exponent
+     * @throw std::invalid_argument Exponent není přirozené číslo
+     * @param[in] base Základ mocniny
+     * @param[in] exp Exponent 
+     * @return Mocnina base^exp
      */
     double Pow(double base, double exp);
 
     /**
-     * @brief Funkce zjisti logaritmus o zakladu 10 z cisla
-     * @param num cislo ke zlogaritmovani
-     * @return logaritmus z num o zakladu 10
+     * @brief Operace logaritmu 
+     * @details Funkce zjistí logaritmus o základu 10 z čísla
+     * @throw std::invalid_argument Čislo není kladné
+     * @param[in] num Čislo ke zlogaritmování
+     * @return Logaritmus z num o základu 10
      */
     double Log10(double num);
 };
 
 #endif
+/* math_lib.h */
