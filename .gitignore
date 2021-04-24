@@ -1,8 +1,1 @@
-/src/*
-!/src/build/
-!/src/include/
-!/src/CMakeLists.txt
-!/src/**/.cpp
-!/src/**/.h
-!/src/gui/
-!/src/googletest
+/src/build/*
