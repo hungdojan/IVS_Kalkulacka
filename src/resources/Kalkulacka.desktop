@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Kalkulacka
+Comment=Kalkulacka s grafikym uzivatelskym prostredim
+Type=Application
+Exec=/opt/IVS_Kalkulacka/Kalkulacka
+Icon=/opt/IVS_Kalkulacka/calculator.svg
+Terminal=false
+Categories=Utility
