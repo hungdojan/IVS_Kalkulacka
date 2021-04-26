@@ -20,6 +20,8 @@
 #include "math_lib.h"
 #include "helpwindow.h"
 
+#define MAX_DIGITS 13 /**< maximalni pocet cifer na displeji */
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
