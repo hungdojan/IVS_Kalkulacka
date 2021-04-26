@@ -133,10 +133,12 @@ void MainWindow::PrintNumber(int id) {
         currText = "";
         toClear = false;
     }
+    //je-li zmacknuto tlacitko k invertovani znamenka, dojde jen k jeho zmene
     if(id == Button::INV){
-        if(currText.size()==0)
+        //cislo 0 nemuze byt zapsano jako -0
+        if(currText.size()==0 || currText == "0")
             currText = "0";
-        if(currText[0] != '-')
+        else if(currText[0] != '-')
             currText.prepend("-");
         else
             currText.remove(0,1);
@@ -175,7 +177,7 @@ void MainWindow::BasicOperation(int id) {
         //dojde ke zmene adv.operace na basic napr. 2,^,+,3 = 5
         if(toClear == true){
             adv_operation = NONE_O;
-            currText = QString::number(adv_result);
+            currText = QString::number(adv_result, 'g', MAX_DIGITS);
             adv_result = 0;
         }
         //ziska se vysledek adv.operace: napr. 2,^,3,-,3 = 5
@@ -186,7 +188,7 @@ void MainWindow::BasicOperation(int id) {
             else if(adv_operation == Operation::SQRT_O)
                 AdvanceOperation(Button::SQRT);
 
-            currText = QString::number(result);
+            currText = QString::number(result, 'g', MAX_DIGITS);
         }
     }
 
@@ -197,6 +199,7 @@ void MainWindow::BasicOperation(int id) {
         switch (operation) {
             case Operation::ADD_O:
                 result = m.Sum(result, currText.toDouble());
+                qDebug() << m.Sum(60000,0.123);
                 break;
             case Operation::SUB_O:
                 result = m.Subtract(result, currText.toDouble());
@@ -216,7 +219,7 @@ void MainWindow::BasicOperation(int id) {
                 break;
         }
         //zobrazeni vysledku result na display
-        currText = QString::number(result);
+        currText = QString::number(result, 'g', MAX_DIGITS);
     }
     //pokud zadna operace nebyla ulozena, pouze se nastavi nova a text jde do result
     if(operation == Operation::NONE_O)
@@ -259,7 +262,7 @@ void MainWindow::AdvanceOperation(int id) {
     switch (id) {
         case Button::LOG:
             try {
-                currText = QString::number(m.Log10(currText.toDouble()));
+                currText = QString::number(m.Log10(currText.toDouble()), 'g', MAX_DIGITS);
             } catch (std::exception e) {
                 //error log (<= 0) a reset hodnot
                 currText = "Error log";
@@ -287,7 +290,7 @@ void MainWindow::AdvanceOperation(int id) {
                     ResetVals();
                     return;
                 }
-                currText = QString::number(adv_result);
+                currText = QString::number(adv_result, 'g', MAX_DIGITS);
                 //zavola se funkce jakoby bylo kliknuto "rovna se"
                 BasicOperation(Button::EQL);
 
@@ -315,7 +318,7 @@ void MainWindow::AdvanceOperation(int id) {
                     ResetVals();
                     return;
                 }
-                currText = QString::number(adv_result);
+                currText = QString::number(adv_result, 'g', MAX_DIGITS);
                 BasicOperation(Button::EQL);
 
                 //restart advance hodnot
@@ -329,7 +332,7 @@ void MainWindow::AdvanceOperation(int id) {
         case Button::FACT:
             //primo i ukaze vysledek
             try {
-                currText = QString::number(m.Factor(currText.toDouble()));
+                currText = QString::number(m.Factor(currText.toDouble()), 'g', MAX_DIGITS);
             } catch (std::exception e) {
                 //error (<0)! a reset hodnot
                 currText = "Error fact";
@@ -357,7 +360,7 @@ void MainWindow::OutputResult() {
     //jeli ve vypisu i text nejake chyby, nesmi se premazat
     bool isNum = currText.toDouble(&isNum);
     if(isNum)
-        currText = QString::number(result);
+        currText = QString::number(result, 'g', MAX_DIGITS);
     else{
         toClear = true;
         result = 0;
@@ -388,13 +391,13 @@ void MainWindow::ClearData() {
 void MainWindow::MemoryOperation(int id) {
     qDebug() << "Tlacitko: " << id;
 
-    //MEM+ tlacitko pridani do pameti ######################
+    //MEM+ tlacitko pridani do pameti
     if(id == Button::MEMIN){
         memory = currText.toDouble();
     }
     //MEM vlozeni z pameti
     else if(id == Button::MEMOUT){
-        currText = QString::number(memory);
+        currText = QString::number(memory, 'g', MAX_DIGITS);
         toClear = false;
     }
 }
