@@ -199,7 +199,6 @@ void MainWindow::BasicOperation(int id) {
         switch (operation) {
             case Operation::ADD_O:
                 result = m.Sum(result, currText.toDouble());
-                qDebug() << m.Sum(60000,0.123);
                 break;
             case Operation::SUB_O:
                 result = m.Subtract(result, currText.toDouble());
