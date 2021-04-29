@@ -9,7 +9,7 @@
  *
  * @version 1.0.0
  * @date 30.04.2021
- * @copyright GNU Public Licence v3.0
+ * @copyright GNU Public License v3.0
  */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H

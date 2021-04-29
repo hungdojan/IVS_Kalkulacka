@@ -1,3 +1,12 @@
+/**
+ * @brief Výpočet směrodatné odchylky
+ *
+ * @authors Hung Do, David Kedra, Petr Kolařík
+ *
+ * @version 1.0.0
+ * @date 30.04.2021
+ * @copyright GNU Public License v3.0
+ */
 #include <iostream>
 #include <vector>
 #include "math_lib.h"
@@ -9,7 +18,6 @@ using namespace std;
  * oddelenych bilymi znaky. Cyklycky vypocet je vykonan pomoci matematickych funkci ze 
  * tridy Math, ktere mohou byt dale sledovany nastroji k optimalizaci jejich implementaci
  */
-
 int main(){
     //matematicke funkce
     Math m;
@@ -82,4 +90,4 @@ int main(){
 
     return 0;
 }
-      
+/* profiling.cpp */      

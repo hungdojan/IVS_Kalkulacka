@@ -1,25 +1,62 @@
+/**
+ * @class BasicOperation AdvanceOperation
+ * @brief Test matematické knihovny
+ *
+ * @details Tento soubor testuje vlastně napsanou matematickou knihovnu math_lib.
+ *
+ * @authors Hung Do, David Kedra, Petr Kolařík
+ *
+ * @version 1.0.0
+ * @date 30.04.2021
+ */
 #include <gtest/gtest.h>
 #include "math_lib.h"
 
+/**
+ * @brief Test základních operací
+ */ 
 class BasicOperation : public ::testing::Test {
     protected:
+        /// Instance s matematickými operacemi
         Math m;
+        /// Pole náhodně vybraných hodnot
         double values[10] = {10, 85, 456123456, 25846185, 0, -60, -30, 0.5, 0.65, -0.8};
+        /// Velikost pole
         const int arr_size = 10;
+        /**
+         * @brief Konstruktor testu
+         */
         virtual void SetUp() {};
+        /**
+         * @brief Destruktor testu
+         */
         virtual void TearDown() {};
 };
 
+/**
+ * @brief Test pokročilých operací
+ */ 
 class AdvanceOperation : public ::testing::Test {
     protected:
+        /// Instance s matematickými operacemi
         Math m;
+        /// Pole náhodně vybraných hodnot
         double values[10] = {1, 5, 456123456, 25846185, 0, -60, -30, 0.65, -0.8, 10};
+        /// Velikost pole
         const int arr_size = 10;
+        /**
+         * @brief Konstruktor testu
+         */
         virtual void SetUp() {};
+        /**
+         * @brief Destruktor testu
+         */
         virtual void TearDown() {};
 };
 
-// testovani funkce Sum (scitani)
+/**
+ * @brief Testování funkce Sum (sčítání)
+ */
 TEST_F(BasicOperation, Sum) {
     EXPECT_FALSE(m.Sum(values[0], values[1]) != 95);
     EXPECT_TRUE(m.Sum(0, values[7]) == values[7]);
@@ -38,7 +75,9 @@ TEST_F(BasicOperation, Sum) {
 			  m.Sum(10, m.Sum(20, 30)));
 }
 
-// testovani funkce Subtract (scitani)
+/** 
+ * @brief Testování funkce Subtract (odčítání)
+ */
 TEST_F(BasicOperation, Subtract) {
     EXPECT_FALSE(m.Subtract(values[0], values[1]) != -75);
     EXPECT_FLOAT_EQ(m.Subtract(values[7], values[9]), 1.3);
@@ -59,7 +98,9 @@ TEST_F(BasicOperation, Subtract) {
 			  m.Subtract(10, m.Subtract(20, 30)));
 }
 
-// testovani funkce Divide (deleni)
+/** 
+ * @brief Testování funkce Divide (dělení)
+ */
 TEST_F(BasicOperation, Divide) {
     EXPECT_ANY_THROW(m.Divide(values[5], 0));// test spadne, pokud se deli nulou
     EXPECT_FALSE(m.Divide(values[1], values[0]) != 8.5);
@@ -76,7 +117,9 @@ TEST_F(BasicOperation, Divide) {
 	EXPECT_FLOAT_EQ(res, 0.25);
 }
 
-// testovani funkce Multiply (nasobeni)
+/** 
+ * @brief Testování funkce Multiply (násobení)
+ */
 TEST_F(BasicOperation, Multiply) {
     EXPECT_FALSE(m.Multiply(values[1], values[6]) != -2550);
     EXPECT_TRUE(m.Multiply(values[2], values[3]) == 11789051226615360);
@@ -94,7 +137,9 @@ TEST_F(BasicOperation, Multiply) {
 			  m.Multiply(10, m.Multiply(20, 30)));
 }
 
-// testovani funkce Factor (faktorial)
+/** 
+ * @brief Testování funkce Factor (faktoriál)
+ */
 TEST_F(AdvanceOperation, Factor) {
     EXPECT_ANY_THROW(m.Factor(values[7]));// test spadne, pokud je faktorial desetinne cislo
     EXPECT_ANY_THROW(m.Factor(values[6]));// test spadne, pokud je faktorial zaporne cislo
@@ -104,7 +149,9 @@ TEST_F(AdvanceOperation, Factor) {
     EXPECT_EQ(m.Factor(values[0]), 1);
 }
 
-// testovani funkce Pow (umocneni)
+/** 
+ * @brief Testování funkce Pow (umocnění)
+ */
 TEST_F(AdvanceOperation, Pow) {
     EXPECT_ANY_THROW(m.Pow(values[1], values[7]));// test spadne, pokud je exponent desetinne cislo
     EXPECT_ANY_THROW(m.Pow(values[1], values[6]));// test spadne, pokud je exponent zaporne cislo
@@ -119,7 +166,9 @@ TEST_F(AdvanceOperation, Pow) {
     EXPECT_FLOAT_EQ(result, 1);
 }
 
-// testovani funkce Sqrt (odmocneni)
+/** 
+ * @brief Testování funkce Sqrt (odmocnění)
+ */
 TEST_F(AdvanceOperation, Sqrt) {
     EXPECT_ANY_THROW(m.Sqrt(2, values[6]));// test spadne, pokud se odmocnuje zaporne cislo
     EXPECT_ANY_THROW(m.Sqrt(0, values[1]));// test spadne, pokud je odmocnitel nulovy
@@ -135,7 +184,9 @@ TEST_F(AdvanceOperation, Sqrt) {
     EXPECT_FLOAT_EQ(result, 53.9282691);
 }
 
-// testovani funkce Log10 (logaritmus o zakladu 10)
+/** 
+ * @brief Testování funkce Log10 (logaritmus o základu 10)
+ */
 TEST_F(AdvanceOperation, Log10) {
     EXPECT_ANY_THROW(m.Log10(0));// test spadne, pokud logaritmujeme nulu
     EXPECT_ANY_THROW(m.Log10(-5));// test spadne, pokud logaritmujeme zapornym cislem
@@ -153,7 +204,9 @@ TEST_F(AdvanceOperation, Log10) {
     EXPECT_FLOAT_EQ(result, 0.6989700043);
 }
 
-// testovani Pythogorovy vety
+/** 
+ * @brief Testování Pythogorovy věty
+ */
 TEST(CombinedOperation, Pythogoras) {
 	Math m;
 	double a=3, b=4;
@@ -167,10 +220,13 @@ TEST(CombinedOperation, Pythogoras) {
 	EXPECT_FLOAT_EQ(res, 13);
 }
 
-// testovani vypoctu obsahu kruhu
+/**
+ * @brief Testování výpočtu obsahu kruhu
+ */
 TEST(CombinedOperation, CircleArea) {
 	Math m;
 	double radius = 12;
 	double pi = 3.14;
 	EXPECT_FLOAT_EQ(m.Multiply(pi, m.Pow(radius, 2)), 452.16);
 }
+/* test_lib.cpp */

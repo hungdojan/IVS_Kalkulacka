@@ -1,0 +1,3 @@
+xdohun00 100% (správa repozitáře, sestavování programu (cmake a make), tvorba souborů, instalace)
+xkedra00 100% (matematická knihovna, profiling, GUI jádro)
+xkolar79 100% (testy, dokumentace, mockup, GUI vzhled)

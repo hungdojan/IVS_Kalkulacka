@@ -1,3 +1,12 @@
+/**
+ * @brief Deklarace funkcí matematické knihovny
+ *
+ * @authors Hung Do, David Kedra, Petr Kolařík
+ *
+ * @version 1.0.0
+ * @date 30.04.2021
+ * @copyright GNU Public License v3.0
+ */
 #include <iostream>
 #include "math_lib.h"
 
@@ -73,4 +82,4 @@ double Math::Log10(double num){
         throw std::invalid_argument("Chyba: Logaritmus 0 neni definovan!");
     return log10(num);
 }
-
+/* math_lib.cpp */
