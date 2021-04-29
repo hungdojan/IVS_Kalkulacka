@@ -1,7 +1,15 @@
+/**
+ * @brief Hlavní okno aplikace
+ *
+ * @authors Hung Do, David Kedra, Petr Kolařík
+ *
+ * @version 1.0.0
+ * @date 30.04.2021
+ * @copyright GNU Public License v3.0
+ */
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <QApplication>
-#include <QDebug>	// this library can be removed in the final version
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -66,8 +74,6 @@ void MainWindow::MapSignal() {
     signalMapper -> setMapping(ui->helpButton  		 , Button::HELP  );
     signalMapper -> setMapping(ui->deleteButton		 , Button::DEL   );
     signalMapper -> setMapping(ui->clearButton		 , Button::CLR	 );
-
-    // FIXME: additional features that can be removed in the final version
     signalMapper -> setMapping(ui->memoryOutButton	 , Button::MEMOUT);
     signalMapper -> setMapping(ui->memoryInButton 	 , Button::MEMIN );
     signalMapper -> setMapping(ui->invertButton	  	 , Button::INV   );
@@ -115,10 +121,7 @@ void MainWindow::Action(int id) {
             break;
         case Button::MEMOUT:
         case Button::MEMIN:
-            MemoryOperation(id);	//< this feature can be removed in the final version
-            break;
-        default:
-            qDebug() << "Nedefinovana akce!\n";
+            MemoryOperation(id);
             break;
     }
 
@@ -127,7 +130,6 @@ void MainWindow::Action(int id) {
 }
 
 void MainWindow::PrintNumber(int id) {
-    qDebug() << "Tlacitko: " << id;
     //ma-li byt premazan aktualni text na displayi, vymaze se
     if(toClear){
         currText = "";
@@ -171,7 +173,6 @@ void MainWindow::ResetVals(){
 }
 
 void MainWindow::BasicOperation(int id) {
-    qDebug() << "Tlacitko: " << id << " op: " << operation;
     //aby basicOperace aplikovala pripadny vysledek advance (chova se jako =)
     if(adv_operation != Operation::NONE_O && id != Button::EQL){
         //dojde ke zmene adv.operace na basic napr. 2,^,+,3 = 5
@@ -248,8 +249,6 @@ void MainWindow::BasicOperation(int id) {
 }
 
 void MainWindow::AdvanceOperation(int id) {
-    qDebug() << "Tlacitko: " << id;
-
     //pokud doslo ke zmene operace bez zadani operandu, zrusi se
     //napr. 5,-,^,2 = 25
     if(operation != Operation::NONE_O && toClear == true){
@@ -344,8 +343,6 @@ void MainWindow::AdvanceOperation(int id) {
 }
 
 void MainWindow::OutputResult() {
-    qDebug() << "Tlacitko: " << Button::EQL;
-
     //pro 2-operandovou funkci je zpetne zavolana AdvanceOperation
     if(adv_operation == Operation::POW_O)
         AdvanceOperation(Button::POW);
@@ -369,12 +366,9 @@ void MainWindow::OutputResult() {
 
 void MainWindow::DisplayHelp() {
     helpWindow.show();
-    qDebug() << "Tlacitko: " << Button::HELP;
 }
 
 void MainWindow::DeleteDigit() {
-    qDebug() << "Tlacitko: " << Button::DEL;
-
     //useknuti posledni cislice/tecky
     currText.chop(1);
     //byla-li posleni cislice, zobrazi se 0, nebo je stav zobrazeni vysledku
@@ -388,8 +382,6 @@ void MainWindow::ClearData() {
 }
 
 void MainWindow::MemoryOperation(int id) {
-    qDebug() << "Tlacitko: " << id;
-
     //MEM+ tlacitko pridani do pameti
     if(id == Button::MEMIN){
         memory = currText.toDouble();
@@ -436,4 +428,4 @@ MainWindow::~MainWindow() {
     if (signalMapper != NULL) 	{ delete signalMapper; }
     if (ui			 != NULL)	{ delete ui; }
 }
-
+/* mainwindow.cpp */

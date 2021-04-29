@@ -1,0 +1,5 @@
+Vše proběhlo podle plánu, na konci projektu se výměnily role u tvorby dokumentace. 
+GUI se rozdělilo rovnoměrně mezi členy týmu:
+    - Petr Kolařík - Design
+    - David Kedra  - Hlavní logika programu
+    - Hung Do      - Tvorba kostry GUI
